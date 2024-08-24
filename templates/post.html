@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ post.title }}</h2>
+<p>{{ post.content }}</p>
+<form method="POST" action="{{ url_for('delete_post', post_id=post.id) }}">
+    <input type="submit" value="Delete Post" onclick="return confirm('Are you sure you want to delete this post?');">
+</form>
+<a href="{{ url_for('discussion', post_id=post.id) }}" class="button">Discuss this topic</a>
+<a href="{{ url_for('index') }}" class="button">Back to Posts</a>
+{% endblock %}

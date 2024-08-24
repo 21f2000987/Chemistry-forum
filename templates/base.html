@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry Forum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" href="https://www.example.com/favicon.ico" type="image/x-icon"> <!-- Replace with your favicon URL -->
+</head>
+<body>
+    <header>
+        <h1>Chemistry Forum</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('new_post') }}">New Post</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>Name: <strong>Parashmani Datta</strong></p>
+        <p>&copy; 2024 Chemistry Forum</p>
+        <p>Address: Kolkata, 21f2000987@ds.study.iitm.ac.in</p>
+    </footer>
+</body>
+</html>
