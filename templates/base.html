@@ -12,14 +12,19 @@
         <h1>Chemistry Forum</h1>
         <nav>
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('new_post') }}">New Post</a>
+            <a href="{{ url_for('new_post') }}">Create New Post</a>
         </nav>
     </header>
     <main>
+        <!-- Cautionary Note -->
+        <div class="caution-note">
+            <p><strong>Important Notice:</strong> This forum is exclusively for discussing topics related to chemistry. Any unlawful or inappropriate content will be filtered out. Please adhere to our guidelines to ensure a productive and respectful discussion.</p>
+        </div>
+        
         {% block content %}{% endblock %}
     </main>
     <footer>
-        <p><strong>Parashmani Datta</strong></p>
+        <p><strong>Mr. Parashmani Datta</strong></p>
         <p>&copy; 2024 Chemistry Forum</p>
         <p>Address: Kolkata, 9804183208</p>
     </footer>

@@ -42,6 +42,105 @@ main {
     flex: 1; /* Ensures main content takes up available space */
 }
 
+/* Cautionary Note Styling */
+.caution-note {
+    background-color: #ff3b3b; /* Light Yellow */
+    color: #333;
+    padding: 15px;
+    margin: 20px 0;
+    border: 1px solid #fbc02d; /* Darker Yellow */
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+.caution-note p {
+    margin: 0;
+}
+
+/* Post Page Styling */
+.post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.post-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.post-content {
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.button-group {
+    display:;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 150px; /* Set a fixed width for buttons */
+    text-align: center; /* Center the text within the button */
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.delete-form {
+    display: inline;
+}
+
+.fa {
+    margin-right: 5px;
+}
+
 h2 {
     border-bottom: 2px solid #004d00;
     padding-bottom: 10px;

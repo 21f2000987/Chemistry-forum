@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import re
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Necessary for flash messages
+app.secret_key = 'parash'  # Necessary for flash messages
 
 # Mock database of blog posts
 posts = [
@@ -14,7 +14,7 @@ posts = [
 ]
 
 # List of unlawful words (example list)
-UNLAWFUL_WORDS = ['badword1', 'badword2', 'inappropriate']  # Replace with actual words
+UNLAWFUL_WORDS = ['love', 'sex', 'murder','porn','revenge','hate']  # Replace with actual words
 
 def is_valid_content(content):
     # Convert content to lowercase to make the check case-insensitive
