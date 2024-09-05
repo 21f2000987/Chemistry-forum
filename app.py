@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
+import re
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Necessary for flash messages
 
 # Mock database of blog posts
 posts = [
@@ -11,6 +13,17 @@ posts = [
     {'id': 5, 'title': 'Organic Conversions', 'content': 'A review of various organic conversions and reactions.', 'comments': []}
 ]
 
+# List of unlawful words (example list)
+UNLAWFUL_WORDS = ['badword1', 'badword2', 'inappropriate']  # Replace with actual words
+
+def is_valid_content(content):
+    # Convert content to lowercase to make the check case-insensitive
+    content_lower = content.lower()
+    # Check for any unlawful words
+    for word in UNLAWFUL_WORDS:
+        if re.search(r'\b' + re.escape(word) + r'\b', content_lower):
+            return False
+    return True
 
 @app.route('/')
 def index():
@@ -19,11 +32,16 @@ def index():
 @app.route('/post/<int:post_id>')
 def post(post_id):
     post = next((post for post in posts if post['id'] == post_id), None)
+    if post is None:
+        return render_template('404.html'), 404  # Handle post not found
     return render_template('post.html', post=post)
 
 @app.route('/post/<int:post_id>/discussion', methods=['GET', 'POST'])
 def discussion(post_id):
     post = next((post for post in posts if post['id'] == post_id), None)
+    if post is None:
+        return render_template('404.html'), 404  # Handle post not found
+    
     if request.method == 'POST':
         name = request.form['name']
         comment = request.form['comment']
