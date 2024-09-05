@@ -2,13 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# Mock database
+# Mock database of blog posts
 posts = [
-    {'id': 1, 'title': 'The Importance of Chemical Reactions', 'content': 'Discussion on why chemical reactions are crucial in chemistry.', 'comments': []},
-    {'id': 2, 'title': 'Chemical Kinetics', 'content': 'Rate and Arhennius Equation.', 'comments': []},
-    {'id': 3, 'title': 'Chemical Equilibirium', 'content': 'Reversible Reactions.', 'comments': []},
-    {'id': 4, 'title': 'Organic Mechanisms', 'content': 'Discuss.', 'comments': []},
-    {'id': 5, 'title': 'Organic Conversions', 'content': 'Discuss.', 'comments': []}
+    {'id': 1, 'title': 'The Importance of Chemical Reactions', 'content': 'A discussion on why chemical reactions are crucial in chemistry.', 'comments': []},
+    {'id': 2, 'title': 'Chemical Kinetics', 'content': 'An overview of reaction rates and the Arrhenius Equation.', 'comments': []},
+    {'id': 3, 'title': 'Chemical Equilibrium', 'content': 'An explanation of reversible reactions and equilibrium concepts.', 'comments': []},
+    {'id': 4, 'title': 'Organic Mechanisms', 'content': 'A discussion on mechanisms in organic chemistry.', 'comments': []},
+    {'id': 5, 'title': 'Organic Conversions', 'content': 'A review of various organic conversions and reactions.', 'comments': []}
 ]
 
 
@@ -27,8 +27,13 @@ def discussion(post_id):
     if request.method == 'POST':
         name = request.form['name']
         comment = request.form['comment']
-        post['comments'].append({'name': name, 'text': comment})
-        return redirect(url_for('discussion', post_id=post_id))
+        
+        if is_valid_content(comment):
+            post['comments'].append({'name': name, 'text': comment})
+            return redirect(url_for('discussion', post_id=post_id))
+        else:
+            flash('Your comment contains unlawful or invalid content and could not be posted.')
+    
     return render_template('discussion.html', post=post)
 
 @app.route('/post/<int:post_id>/delete', methods=['POST'])
@@ -51,14 +56,17 @@ def new_post():
         title = request.form['title']
         content = request.form['content']
         
-        # Generate new ID
-        if posts:
-            new_id = max(post['id'] for post in posts) + 1
+        if is_valid_content(title) and is_valid_content(content):
+            if posts:
+                new_id = max(post['id'] for post in posts) + 1
+            else:
+                new_id = 1
+            
+            posts.append({'id': new_id, 'title': title, 'content': content, 'comments': []})
+            return redirect(url_for('index'))
         else:
-            new_id = 1  # Start with ID 1 if the list is empty
-        
-        posts.append({'id': new_id, 'title': title, 'content': content, 'comments': []})
-        return redirect(url_for('index'))
+            flash('The title or content contains unlawful or invalid words and could not be posted.')
+    
     return render_template('new_post.html')
 
 if __name__ == '__main__':
